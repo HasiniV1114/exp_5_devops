@@ -1,19 +1,15 @@
 public class Test {
     public static void main(String[] args) {
-        System.out.println("=== Simple Java Calculator ===");
+        System.out.println("=== Simple Java Calculator (All Operations) ===");
 
-        // Check if arguments are provided
-        if (args.length < 3) {
-            System.out.println("Error: Please provide numbers and an operator as arguments.");
-            System.out.println("Usage Example: java Test 10 + 5");
-            return;
-        }
+        // Define your preset numbers
+        double num1 = 10.0;
+        double num2 = 5.0;
 
-        try {
-            double num1 = Double.parseDouble(args[0]);
-            char operator = args[1].charAt(0);
-            double num2 = Double.parseDouble(args[2]);
+        // Array of operators to test all at once
+        char[] operators = {'+', '-', '*', '/'};
 
+        for (char operator : operators) {
             double result = 0;
             boolean validOperation = true;
 
@@ -36,7 +32,6 @@ public class Test {
                     }
                     break;
                 default:
-                    System.out.println("Error: Invalid operator! Use +, -, *, or /");
                     validOperation = false;
                     break;
             }
@@ -44,9 +39,6 @@ public class Test {
             if (validOperation) {
                 System.out.println("Result: " + num1 + " " + operator + " " + num2 + " = " + result);
             }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Please enter valid numbers.");
         }
     }
 }
