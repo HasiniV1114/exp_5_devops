@@ -1,58 +1,52 @@
-import java.util.Scanner;
-
 public class Test {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("=== Simple Java Calculator ===");
-        
-        // Take first number input
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
 
-        // Take operator input
-        System.out.print("Enter an operator (+, -, *, /): ");
-        char operator = scanner.next().charAt(0);
+        // Check if arguments are provided
+        if (args.length < 3) {
+            System.out.println("Error: Please provide numbers and an operator as arguments.");
+            System.out.println("Usage Example: java Test 10 + 5");
+            return;
+        }
 
-        // Take second number input
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
+        try {
+            double num1 = Double.parseDouble(args[0]);
+            char operator = args[1].charAt(0);
+            double num2 = Double.parseDouble(args[2]);
 
-        double result;
-        boolean validOperation = true;
+            double result = 0;
+            boolean validOperation = true;
 
-        // Perform calculation based on the operator
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Error: Division by zero is not allowed.");
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        System.out.println("Error: Division by zero is not allowed.");
+                        validOperation = false;
+                    }
+                    break;
+                default:
+                    System.out.println("Error: Invalid operator! Use +, -, *, or /");
                     validOperation = false;
-                    result = 0;
-                }
-                break;
-            default:
-                System.out.println("Error: Invalid operator!");
-                validOperation = false;
-                result = 0;
-                break;
-        }
+                    break;
+            }
 
-        // Print the result if the operation was valid
-        if (validOperation) {
-            System.out.println("Result: " + num1 + " " + operator + " " + num2 + " = " + result);
-        }
+            if (validOperation) {
+                System.out.println("Result: " + num1 + " " + operator + " " + num2 + " = " + result);
+            }
 
-        scanner.close();
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid numbers.");
+        }
     }
 }
